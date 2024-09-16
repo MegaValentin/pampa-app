@@ -95,7 +95,6 @@ function Navbar() {
         </ul>
       </div>
 
-      {/* Dropdown Menu for Mobile with transition */}
       <div
         className={`${
           isOpen ? "max-h-screen opacity-100" : "max-h-0 opacity-0"
