@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+nav {
+    background: #F5F5DC;
+}
+footer{
+  background: #f5f5dc
+}
+.navegacion{
+    font-family: "Josefin Sans", sans-serif;
+  font-optical-sizing: auto;
+  
+}
