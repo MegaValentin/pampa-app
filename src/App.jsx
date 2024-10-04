@@ -8,6 +8,7 @@ import Entrevistas from './pages/Entrevistas'
 import Articulos from './pages/Articulos'
 import Producciones from './pages/Producciones'
 import Calendario from './pages/Calendario'
+import ArticleDetail from './pages/ArticleDetail'
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
         <Route path="/entrevistas" element={<Entrevistas />} />
         <Route path="/articulos" element={<Articulos />} />
         <Route path="/calendario" element={<Calendario />} />
+        <Route path="/article/:id" element={<ArticleDetail />} />
       </Routes>
     
     <Footer/>
