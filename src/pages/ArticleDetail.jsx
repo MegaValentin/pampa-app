@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import Spinner from '../components/Spinner';
 import axios from 'axios';
+import ListRandomArticle from '../components/ListRandomArticle';
 
 const ArticleDetail = () => {
   const { id } = useParams(); 
@@ -30,6 +31,7 @@ const ArticleDetail = () => {
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
+    <>
     <div className="container mx-auto p-4 md:p-9">
       {article && (
         <>
@@ -54,6 +56,8 @@ const ArticleDetail = () => {
         </>
       )}
     </div>
+    <ListRandomArticle/>
+    </>
   );
 };
 

@@ -1,0 +1,82 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Spinner from './Spinner';
+import { Link, useNavigate } from 'react-router-dom';
+import Calendar from 'react-calendar';
+
+const ListRandomArticle = () => {
+    const [articles, setArticles] = useState([]);
+    const [randomArticles, setRandomArticles] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
+    const navigate = useNavigate(); // Hook para la navegación
+
+    useEffect(() => {
+        const apiURL = 'https://66fdcfad6993693089564945.mockapi.io/api/article';
+
+        const fetchArticles = async () => {
+            try {
+                const response = await axios.get(apiURL);
+                const fetchedArticles = response.data;
+
+                // Selecciona 5 artículos aleatorios
+                const randomSelection = getRandomArticles(fetchedArticles, 5);
+                setArticles(fetchedArticles);
+                setRandomArticles(randomSelection);
+            } catch (err) {
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchArticles();
+    }, []);
+
+    const getRandomArticles = (articlesArray, count) => {
+        const shuffled = articlesArray.sort(() => 0.5 - Math.random());
+        return shuffled.slice(0, count);
+    };
+
+    // Función que maneja el clic y recarga la página
+    const handleArticleClick = (id) => {
+        navigate(`/article/${id}`);
+        window.location.reload();
+    };
+
+    if (loading) return <Spinner />;
+    if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+
+    return (
+        <div className='container mx-auto p-9'>
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
+                <div className="container mx-auto p-4 md:p-9 md:col-span-2">
+                    <h2 className="text-2xl font-bold text-gray-800 mb-4">Seguir leyendo</h2>
+                    <ul className="space-y-4">
+                        {randomArticles.map((article) => (
+                            <li
+                                key={article.id}
+                                className="flex items-center border-b-2 pb-4 cursor-pointer"
+                                onClick={() => handleArticleClick(article.id)}
+                            >
+                                <img
+                                    className="w-20 h-20 object-cover mr-4 rounded-lg"
+                                    src={article.image}
+                                    alt={article.title}
+                                />
+                                <h3 className="text-lg font-semibold text-gray-800">{article.title}</h3>
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+                <div className="md:col-span-1 flex justify-center items-center">
+                    <Calendar />
+                </div>
+
+            </div>
+
+        </div>
+    );
+};
+
+export default ListRandomArticle;
