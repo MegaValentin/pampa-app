@@ -132,6 +132,7 @@ function Navbar() {
             <Link
               to="/calendario"
               className="text-black hover:text-gray-300 transition duration-300"
+              onClick={toggleMenu}
             >
               Calendario
             </Link>

@@ -9,6 +9,8 @@ import Articulos from './pages/Articulos'
 import Producciones from './pages/Producciones'
 import Calendario from './pages/Calendario'
 import ArticleDetail from './pages/ArticleDetail'
+import LoginPage from './pages/LoginPage'
+import Dashboard from './components/Dashboard'
 
 function App() {
   
@@ -19,6 +21,7 @@ function App() {
       <NavBar/>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path='/login' element={<LoginPage/>}/>
         <Route path="/producciones" element={<Producciones />} />
         <Route path="/entrevistas" element={<Entrevistas />} />
         <Route path="/articulos" element={<Articulos />} />
