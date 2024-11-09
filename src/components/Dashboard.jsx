@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import AddArticle from "./AddArticle";
 import ListArticleAdmin from "./ListArticleAdmin";
 import AddUser from "./AddUser";
+import AdminCalendar from "./AddminCalindar";
 import { useAuth } from "../context/AuthContext";
 const Dashboard = () => {
   const [selectedOption, setSelectedOption] = useState("");
@@ -16,6 +17,9 @@ const Dashboard = () => {
         return <ListArticleAdmin />;
       case "adduser":
         return <AddUser />;
+      case "calendar":
+        return <AdminCalendar/>
+        
       default:
         return (
           <div className="flex justify-center items-center h-full">
@@ -40,6 +44,12 @@ const Dashboard = () => {
           className="text-left p-3 rounded-lg hover:bg-gray-700 mb-2 transition"
         >
           Lista de Artículos
+        </button>
+        <button
+          onClick={() => setSelectedOption("calendar")}
+          className="text-left p-3 rounded-lg hover:bg-gray-700 mb-2 transition"
+        >
+          Admistrar calendario
         </button>
         <button
           onClick={() => setSelectedOption("adduser")}

@@ -62,28 +62,21 @@ function Navbar() {
         <ul className="hidden md:flex space-x-20 navegacion p-9 mr-24">
           <li>
             <Link
-              to="/producciones"
-              className="text-black hover:text-gray-300 transition duration-300"
-            >
-              Producciones
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/entrevistas"
-              className="text-black hover:text-gray-300 transition duration-300"
-            >
-              Entrevistas
-            </Link>
-          </li>
-          <li>
-            <Link
               to="/articulos"
               className="text-black hover:text-gray-300 transition duration-300"
             >
               Artículos
             </Link>
           </li>
+          <li>
+            <Link
+              to="/producciones"
+              className="text-black hover:text-gray-300 transition duration-300"
+            >
+              Librería
+            </Link>
+          </li>
+          
           <li>
             <Link
               to="/calendario"
@@ -103,24 +96,6 @@ function Navbar() {
         <ul className="flex flex-col space-y-4 mt-4 text-center">
           <li>
             <Link
-              to="/producciones"
-              className="text-black hover:text-gray-300 transition duration-300"
-              onClick={toggleMenu}
-            >
-              Producciones
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/entrevistas"
-              className="text-black hover:text-gray-300 transition duration-300"
-              onClick={toggleMenu}
-            >
-              Entrevistas
-            </Link>
-          </li>
-          <li>
-            <Link
               to="/articulos"
               className="text-black hover:text-gray-300 transition duration-300"
               onClick={toggleMenu}
@@ -128,6 +103,16 @@ function Navbar() {
               Artículos
             </Link>
           </li>
+          <li>
+            <Link
+              to="/producciones"
+              className="text-black hover:text-gray-300 transition duration-300"
+              onClick={toggleMenu}
+            >
+              Librería
+            </Link>
+          </li>
+          
           <li>
             <Link
               to="/calendario"
