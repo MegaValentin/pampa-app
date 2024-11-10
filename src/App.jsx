@@ -13,6 +13,7 @@ import Calendario from './pages/Calendario';
 import ArticleDetail from './pages/ArticleDetail';
 import LoginPage from './pages/LoginPage';
 import Admin from './pages/Admin.jsx';
+import AdminPreview from './components/AdminPreview.jsx';
 
 function App() {
   const { isAuthenticated } = useAuth();
@@ -36,7 +37,8 @@ function App() {
           {/* Protected routes for logged-in users */}
           {isAuthenticated && (
             <>
-              <Route path="/admin" element={<Admin />} />
+            <Route path="/admin" element={<Admin />} />
+            <Route path="/adminpreview/:id" element={<AdminPreview/>} />
               
             </>
           )}

@@ -30,20 +30,26 @@ const apiUrl = import.meta.env.VITE_REACT_APP_API_URL
         withCredentials: true, 
       });
       setMessage('Artículo creado exitosamente');
-      setTitle('');
+      
+      setTimeout(() => {
+        setMessage("")
+        setTitle('');
       setSubtitle('');
       setContent('');
       setImages([]);
       setTags('');
-      setTimeout(() => {
-        setMessage("")
-      window.location.reload()}, 1500)
+      }, 1500)
     } catch (error) {
       console.error('Error al crear el artículo:', error);
       setMessage('Error al crear el artículo');
       setTimeout(() => {
         setMessage("")
-      window.location.reload()}, 1500)
+        setTitle('');
+      setSubtitle('');
+      setContent('');
+      setImages([]);
+      setTags('');
+      }, 1500)
     }
   };
 
