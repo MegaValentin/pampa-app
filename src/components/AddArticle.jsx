@@ -54,7 +54,7 @@ const apiUrl = import.meta.env.VITE_REACT_APP_API_URL
   };
 
   return (
-    <div className="max-w-xl mx-auto p-8 bg-gradient-to-br from-white to-gray-50 rounded-lg shadow-lg">
+    <div className="max-w-xl mx-auto p-8">
       <h2 className="text-3xl font-bold text-gray-800 mb-6 text-center">Agregar Nuevo Artículo</h2>
       <form onSubmit={handleSubmit}>
         <div className="mb-5">

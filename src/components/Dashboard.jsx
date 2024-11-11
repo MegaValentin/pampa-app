@@ -4,7 +4,9 @@ import AddArticle from "./AddArticle";
 import ListArticleAdmin from "./ListArticleAdmin";
 import AddUser from "./AddUser";
 import AdminCalendar from "./AddminCalindar";
+import Galery from "./Galery";
 import { useAuth } from "../context/AuthContext";
+
 const Dashboard = () => {
   const [selectedOption, setSelectedOption] = useState("");
   const { isAuthenticated, logout, user } = useAuth();
@@ -18,8 +20,10 @@ const Dashboard = () => {
       case "adduser":
         return <AddUser />;
       case "calendar":
-        return <AdminCalendar/>
-        
+        return <AdminCalendar />;
+      case "galery":
+        return <Galery />;
+
       default:
         return (
           <div className="flex justify-center items-center h-full">
@@ -27,36 +31,32 @@ const Dashboard = () => {
           </div>
         );
     }
+
   };
+  const adminList = [
+    {to:"addarticle", label: "Argregar Articulo"},
+    {to:"listarticle", label: "Lista de Articulos"},
+    {to:"calendar", label: "Administrar Calendario"},
+    {to:"galery", label: "Galeria Comercial"},
+    {to:"adduser", label: "Gestion de Usuarios"}
+  ]
+
+  const renderButtons = (links) => 
+    links.map((link, index) => (
+      <button
+          key={index}
+          onClick={() => setSelectedOption(link.to)}
+          className="text-left p-3 rounded-lg hover:bg-gray-700 mb-2 transition"
+        >
+          {link.label}
+        </button>
+    ))
 
   return (
     <div className="flex h-screen bg-gray-100">
       <nav className="bg-gray-800 text-white w-full lg:w-64 flex flex-col p-6 lg:h-full">
         <h2 className="text-3xl font-bold mb-8 text-center">PROYECTO PAMPA</h2>
-        <button
-          onClick={() => setSelectedOption("addarticle")}
-          className="text-left p-3 rounded-lg hover:bg-gray-700 mb-2 transition"
-        >
-          Agregar Artículos
-        </button>
-        <button
-          onClick={() => setSelectedOption("listarticle")}
-          className="text-left p-3 rounded-lg hover:bg-gray-700 mb-2 transition"
-        >
-          Lista de Artículos
-        </button>
-        <button
-          onClick={() => setSelectedOption("calendar")}
-          className="text-left p-3 rounded-lg hover:bg-gray-700 mb-2 transition"
-        >
-          Admistrar calendario
-        </button>
-        <button
-          onClick={() => setSelectedOption("adduser")}
-          className="text-left p-3 rounded-lg hover:bg-gray-700 mb-2 transition"
-        >
-          Gestión de Usuarios
-        </button>
+        {renderButtons(adminList)}
         <Link
           to="/"
           className="mt-auto flex items-center justify-center lg:justify-between text-white p-3 rounded-lg bg-red-600 hover:bg-red-500 transition"

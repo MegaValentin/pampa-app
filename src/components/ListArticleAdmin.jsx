@@ -24,13 +24,13 @@ const ListArticleAdmin = () => {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto p-6 bg-white rounded shadow-md">
+    <div className="max-w-4xl mx-auto p-6  ">
       <h1 className="text-2xl font-bold mb-4">Lista de Artículos del Admin</h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {articles.length > 0 ? (
         <ul className="divide-y divide-gray-200">
           {articles.map((article) => (
-            <li key={article._id} className="py-4">
+            <li key={article._id} className="py-4 ">
               <h2 className="text-xl font-semibold text-gray-800">
                 {article.title}
               </h2>
