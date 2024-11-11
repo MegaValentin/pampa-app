@@ -1,7 +1,11 @@
+import BookForm from "./BookForm"
+import BookList from "./BooksList"
+
 const Galery = () => {
     return(
         <>
-            <h1>Galeria Comercial</h1>
+            <BookForm/>
+            <BookList/>
         </>
     )
 }
