@@ -5,6 +5,7 @@ const Galery = () => {
     return(
         <>
             <BookForm/>
+            <h1 className="text-2xl text-center font-bold mb-4">Libros Agregados</h1>
             <BookList/>
         </>
     )
