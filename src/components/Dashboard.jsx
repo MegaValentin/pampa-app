@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import AddArticle from "./AddArticle";
-import ListArticleAdmin from "./ListArticleAdmin";
 import AddUser from "./AddUser";
 import AdminCalendar from "./AddminCalindar";
 import Galery from "./Galery";
@@ -19,8 +18,6 @@ const Dashboard = () => {
     switch (selectedOption) {
       case "addarticle":
         return <AddArticle />;
-      case "listarticle":
-        return <ListArticleAdmin />;
       case "adduser":
         return <AddUser />;
       case "calendar":
@@ -38,7 +35,6 @@ const Dashboard = () => {
 
   const adminList = [
     { to: "addarticle", label: "Agregar Artículo" },
-    { to: "listarticle", label: "Lista de Artículos" },
     { to: "calendar", label: "Administrar Calendario" },
     { to: "galery", label: "Galería Comercial" },
     { to: "adduser", label: "Gestión de Usuarios" },
