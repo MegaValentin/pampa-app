@@ -18,3 +18,21 @@ footer{
 .articulo, .fondo-login{
   background-color:#F5F5DC ;
 }
+
+.react-calendar__tile--highlight {
+  background: #9f55c7;
+  color: white;
+  border-radius: 10%;
+}
+
+.tooltip {
+  position: absolute;
+  top: -35px;
+  left: 0;
+  z-index: 10;
+}
+
+.event-details ul {
+  padding-left: 0;
+  list-style: none;
+}
