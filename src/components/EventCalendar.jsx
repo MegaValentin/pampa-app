@@ -78,6 +78,9 @@ const EventCalendar = () => {
                                 {event.title}
                             </li>
                         ))}
+                    {events.filter(event => event.date === selectedDate.toISOString().slice(0, 10)).length === 0 && (
+                        <li className="text-gray-500">No hay eventos para este día</li>
+                    )}
                 </ul>
             </div>
         </div>
