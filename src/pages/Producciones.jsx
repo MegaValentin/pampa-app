@@ -1,7 +1,11 @@
+import BookCard from "../components/BookCard";
+
 function Producciones(){
 
     return(
-        <h1>Pagina de Producciones</h1>
+        <>
+        <BookCard/>
+        </>
     )
 }
 

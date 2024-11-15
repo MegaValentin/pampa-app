@@ -11,6 +11,7 @@ import Articulos from './pages/Articulos';
 import Producciones from './pages/Producciones';
 import Calendario from './pages/Calendario';
 import ArticleDetail from './pages/ArticleDetail';
+import BookView from './pages/BookView.jsx';
 import LoginPage from './pages/LoginPage';
 import Admin from './pages/Admin.jsx';
 import AdminPreview from './components/AdminPreview.jsx';
@@ -33,6 +34,7 @@ function App() {
           <Route path="/articulos" element={<Articulos />} />
           <Route path="/calendario" element={<Calendario />} />
           <Route path="/article/:id" element={<ArticleDetail />} />
+          <Route path="/bookview/:id" element={<BookView/>} />
 
           {/* Protected routes for logged-in users */}
           {isAuthenticated && (

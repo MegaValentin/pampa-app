@@ -73,7 +73,7 @@ function Navbar() {
               to="/producciones"
               className="text-black hover:text-gray-300 transition duration-300"
             >
-              Librería
+              Galeria Comercial
             </Link>
           </li>
           

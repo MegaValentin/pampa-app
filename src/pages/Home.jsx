@@ -6,25 +6,24 @@ import 'react-calendar/dist/Calendar.css';
 
 function Home() {
   return (
-    <div className="container mx-auto px-6 py-9">
+    <div className="container mx-auto px-4 lg:px-20 py-8">
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-       
-        <div className="lg:col-span-2  p-6">
-          
+        
+        {/* Último artículo */}
+        <div className="lg:col-span-2 p-4 bg-white ">
           <LatestArticle />
         </div>
 
-        <div className="lg:col-span-1  p-6">
-         
+        {/* Calendario de eventos */}
+        <div className="lg:col-span-1 p-4 bg-white ">
           <div className="flex justify-center">
             <EventCalendar />
           </div>
         </div>
       </div>
 
-      
-      <div className="mt-8 bg-white shadow-lg rounded-lg p-6">
-       
+      {/* Lista de artículos */}
+      <div className="mt-8 bg-white  p-6">
         <ArticleList />
       </div>
     </div>
