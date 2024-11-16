@@ -27,26 +27,29 @@ const BookCard = () => {
 
   return (
     <>
-    <div className="container mx-auto p-6">
-  <div className="flex flex-wrap justify-center gap-4">
-    {books.map((book) => (
-        <div className="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow articulo group overflow-hidden transform transition duration-300 hover:scale-105">
-        <Link to={`/bookview/${book._id}`}>
-            <img
-                className="p-4 rounded-t-lg w-full h-80 object-contain"
+    <div className="container mx-auto px-4 lg:px-20 py-8">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {books.map((book) => (
+          <div
+            key={book._id}
+            className=" group overflow-hidden transform transition duration-300 hover:scale-105"
+          >
+            <Link to={`/bookview/${book._id}`}>
+              <img
+                className="p-4 rounded-t-lg w-full h-60 object-contain"
                 src={book.coverImage}
                 alt={book.title}
-            />
-            <div className="px-5 pb-5">
-                <h5 className="text-xl font-semibold tracking-tight text-gray-900 group-hover:text-blue-800">
-                    {book.title}
+              />
+              <div className="px-4 pb-4">
+                <h5 className="text-lg font-semibold tracking-tight text-gray-900 group-hover:text-blue-800">
+                  {book.title}
                 </h5>
-                <p className="text-gray-600">Autor: {book.author}</p>
-            </div>
-        </Link>
-    </div>
-    ))}
-  </div>
+                <p className="text-gray-600 text-sm">Autor: {book.author}</p>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
 </div>
 
      
