@@ -2,13 +2,13 @@ import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import Spinner from "../components/Spinner";
 import axios from "axios";
-import { shuffleArray } from "../utils/utils"
+
 
 const BookView = () => {
   const { id } = useParams();
   const [book, setBook] = useState(null);
   const [relatedBooks, setRelatedBooks] = useState([]);
-  const [visibleStart, setVisibleStart] = useState(0); // Índice inicial del rango
+  const [visibleStart, setVisibleStart] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
@@ -25,14 +25,18 @@ const BookView = () => {
 
         // Filtrar y mezclar los libros relacionados
         const filteredBooks = allBooksResponse.data.filter((b) => b._id !== id);
-        setRelatedBooks(shuffleArray(filteredBooks));
+        setRelatedBooks(filteredBooks);
       } catch (err) {
         setError(err.message);
       } finally {
         setLoading(false);
       }
     };
+
     fetchBookData();
+
+    
+    window.scrollTo({ top: 0, behavior: "smooth" });
   }, [id, apiUrl]);
 
   const handleNext = () => {
@@ -50,11 +54,14 @@ const BookView = () => {
 
   const visibleBooks = [
     ...relatedBooks.slice(visibleStart, visibleStart + 4),
-    ...relatedBooks.slice(0, Math.max(0, (visibleStart + 4) - relatedBooks.length)),
+    ...relatedBooks.slice(
+      0,
+      Math.max(0, visibleStart + 4 - relatedBooks.length)
+    ),
   ];
 
   return (
-    <div className="container mx-auto p-4 md:p-8">
+    <div key={id} className="container mx-auto px-4 lg:px-20 py-8">
       {/* Detalles del libro */}
       {book && (
         <div className="bg-white md:flex mb-8 g">
@@ -66,8 +73,12 @@ const BookView = () => {
             />
           </div>
           <div className="md:w-2/3 p-6">
-            <h1 className="text-3xl font-bold text-gray-800 mb-4">{book.title}</h1>
-            <h2 className="text-xl text-gray-600 italic mb-4">Autor: {book.author}</h2>
+            <h1 className="text-3xl font-bold text-gray-800 mb-4">
+              {book.title}
+            </h1>
+            <h2 className="text-xl text-gray-600 italic mb-4">
+              Autor: {book.author}
+            </h2>
             <p className="text-lg text-gray-700 leading-relaxed mb-6 whitespace-pre-wrap">
               {book.synopsis}
             </p>
@@ -76,12 +87,12 @@ const BookView = () => {
       )}
 
       {/* Slider de libros relacionados */}
-      <div className="bg-white  p-6 mt-16">
+      <div className="bg-white p-10 mt-16">
         <h2 className="text-2xl font-bold mb-4 text-gray-800">Otros libros</h2>
         <div className="flex items-center">
           {/* Botón para retroceder */}
           <button
-            className="p-2 bg-gray-300 rounded-full hover:bg-gray-400"
+            className="p-4 bg-gray-100 rounded-full hover:bg-gray-200 text-xl"
             onClick={handlePrev}
           >
             &#8249;
@@ -92,9 +103,15 @@ const BookView = () => {
             {visibleBooks.map((relatedBook) => (
               <div
                 key={relatedBook._id}
-                className="w-48 min-w-[12rem]    p-4 flex-shrink-0 hover:scale-105 transition-transform"
+                className="w-48 min-w-[12rem] p-4 flex-shrink-0 hover:scale-105 transition-transform"
               >
-                <Link to={`/bookview/${relatedBook._id}`}>
+                <Link
+                  to={`/bookview/${relatedBook._id}`}
+                  onClick={(e) => {
+                    e.preventDefault(); // Evitar el comportamiento predeterminado de navegación de React Router
+                    window.location.href = `/bookview/${relatedBook._id}`;
+                  }}
+                >
                   <img
                     className="rounded-lg w-full h-40 object-contain mb-2"
                     src={relatedBook.coverImage}
@@ -103,7 +120,9 @@ const BookView = () => {
                   <h3 className="text-lg font-semibold text-gray-900 truncate">
                     {relatedBook.title}
                   </h3>
-                  <p className="text-gray-600 text-sm truncate">Autor: {relatedBook.author}</p>
+                  <p className="text-gray-600 text-sm truncate">
+                    Autor: {relatedBook.author}
+                  </p>
                 </Link>
               </div>
             ))}
@@ -111,7 +130,7 @@ const BookView = () => {
 
           {/* Botón para avanzar */}
           <button
-            className="p-2 bg-gray-300 rounded-full hover:bg-gray-400"
+            className="p-4 bg-gray-100 rounded-full hover:bg-gray-200 text-xl"
             onClick={handleNext}
           >
             &#8250;

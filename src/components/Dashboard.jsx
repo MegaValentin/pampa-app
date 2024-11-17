@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import AddArticle from "./AddArticle";
 import AddUser from "./AddUser";
 import AdminCalendar from "./AddminCalindar";
+import PendingMessage from "./PendingMessage";
 import Galery from "./Galery";
 import IconBurguer from "./icons/IconBurguer";
 import IconClose from "./icons/IconClose";
@@ -24,6 +25,8 @@ const Dashboard = () => {
         return <AdminCalendar />;
       case "galery":
         return <Galery />;
+      case "message":
+        return <PendingMessage/> 
       default:
         return (
           <div className="flex justify-center items-center h-full">
@@ -37,7 +40,9 @@ const Dashboard = () => {
     { to: "addarticle", label: "Agregar Artículo" },
     { to: "calendar", label: "Administrar Calendario" },
     { to: "galery", label: "Galería Comercial" },
+    { to: "message", label: "Mensajes Pendientes" },
     { to: "adduser", label: "Gestión de Usuarios" },
+    
   ];
 
   const renderButtons = (links) =>

@@ -9,7 +9,7 @@ import Home from './pages/Home';
 import Entrevistas from './pages/Entrevistas';
 import Articulos from './pages/Articulos';
 import Producciones from './pages/Producciones';
-import Calendario from './pages/Calendario';
+import Contact from './pages/ContactForm.jsx';
 import ArticleDetail from './pages/ArticleDetail';
 import BookView from './pages/BookView.jsx';
 import LoginPage from './pages/LoginPage';
@@ -32,7 +32,7 @@ function App() {
           <Route path="/producciones" element={<Producciones />} />
           <Route path="/entrevistas" element={<Entrevistas />} />
           <Route path="/articulos" element={<Articulos />} />
-          <Route path="/calendario" element={<Calendario />} />
+          <Route path="/contact" element={<Contact />} />
           <Route path="/article/:id" element={<ArticleDetail />} />
           <Route path="/bookview/:id" element={<BookView/>} />
 

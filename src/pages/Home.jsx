@@ -15,7 +15,7 @@ function Home() {
         </div>
 
         {/* Calendario de eventos */}
-        <div className="lg:col-span-1 p-4 bg-white ">
+        <div className="lg:col-span-1 p-6 bg-white ">
           <div className="flex justify-center">
             <EventCalendar />
           </div>

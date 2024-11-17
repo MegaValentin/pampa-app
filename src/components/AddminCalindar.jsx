@@ -40,7 +40,7 @@ const AdminCalendar = () => {
 
   return (
     <>
-    <div className="p-6 bg-white  max-w-md mx-auto">
+    <div className="p-6 max-w-md mx-auto">
       <h2 className="text-2xl font-bold mb-4"> Agregar Evento</h2>
       {message && <p className="text-center mb-4 text-red-500">{message}</p>}
 
@@ -82,9 +82,11 @@ const AdminCalendar = () => {
           Agregar Evento
         </button>
       </form>
+    <div className="flex items-center justify-center w-full h-full mt-10 ">
+        <EventCalendar />
+      </div>
     </div>
 
-    <EventCalendar/>
     </>
   );
 };

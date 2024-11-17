@@ -10,7 +10,8 @@ function Navbar() {
   };
 
   return (
-    <nav className="p-1">
+      
+    <nav className="container  mx-auto px-4 lg:px-20 py-2">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           to="/"
@@ -79,10 +80,10 @@ function Navbar() {
           
           <li>
             <Link
-              to="/calendario"
+              to="/contact"
               className="text-black hover:text-gray-300 transition duration-300"
             >
-              Calendario
+              Contacto
             </Link>
           </li>
         </ul>
