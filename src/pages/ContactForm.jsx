@@ -61,7 +61,7 @@ const Contact = () => {
 
   return (
     <div className="max-w-xl mx-auto p-8 ">
-      
+      <h1>Falta agregar texto</h1>
       <form
         onSubmit={handleSubmit}
         className="bg-white  px-8 pt-6 pb-8"

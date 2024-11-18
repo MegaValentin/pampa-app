@@ -83,6 +83,7 @@ const BookView = () => {
               {book.synopsis}
             </p>
           </div>
+          <p>Falta agregar el instagram </p>
         </div>
       )}
 
