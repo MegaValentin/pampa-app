@@ -9,13 +9,13 @@ const ArticleDetail = () => {
   const [article, setArticle] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
   useEffect(() => {
-    const apiURL = `https://66fdcfad6993693089564945.mockapi.io/api/article/${id}`;
 
     const fetchArticle = async () => {
       try {
-        const response = await axios.get(apiURL);
+        const response = await axios.get(`${apiUrl}/api/article/${id}`);
         setArticle(response.data);
       } catch (err) {
         setError(err.message);
@@ -44,13 +44,15 @@ const ArticleDetail = () => {
               {article.article}
             </p>
             
-          <div className=" mb-8">
-            <img
-              className="w-full h-full object-cover p-10"
-              src={article.image}
-              alt={article.title}
-            />
-          </div>
+            {article.images?.map((img, index) => (
+            <div key={index} className="mb-8 flex justify-center">
+              <img
+                className="max-w-full h-auto rounded shadow-md"
+                src={`data:image/jpeg;base64,${img}`}
+                alt={`${article.title}-${index}`}
+              />
+            </div>
+          ))}
             
           </div>
         </>
