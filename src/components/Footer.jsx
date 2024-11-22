@@ -4,10 +4,10 @@ import IconFacebook from "./icons/IconFacebook";
 import IconInstagram from "./icons/IconInstagram"
 function Footer() {
   return (
-    <footer className="container  mx-auto px-4 lg:px-20 py-2">
+    <footer className="mx-auto px-4 lg:px-20 py-2">
       <div className="container mx-auto flex justify-between items-center">
         {/* Logo y descripción */}
-        <div className="mb-6 md:mb-0 text-center">
+        <div className="mb-6 md:mb-0 text-center px-24">
           <Link
             to="/"
             className="flex flex-col items-center justify-center md:justify-start"

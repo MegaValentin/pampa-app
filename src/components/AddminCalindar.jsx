@@ -40,38 +40,38 @@ const AdminCalendar = () => {
 
   return (
     <>
-    <div className="p-6 max-w-md mx-auto">
+    <div className="max-w-xl mx-auto p-8 ">
       <h2 className="text-2xl font-bold mb-4"> Agregar Evento</h2>
       {message && <p className="text-center mb-4 text-red-500">{message}</p>}
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-gray-700">Titulo</label>
+          <label className="block text-gray-700 font-semibold mb-2">Titulo del evento</label>
           <input
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Titulo del evento"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+            
           />
         </div>
         <div>
-          <label className="block text-gray-700">Descripción</label>
+          <label className="block text-gray-700 font-semibold mb-2">Descripción del evento</label>
           <textarea
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            className="w-full p-2 border border-gray-300 rounded-md"
-            placeholder="Descripción del evento"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
+            
           />
         </div>
         <div>
-          <label className="block text-gray-700">Fecha y Hora</label>
+          <label className="block text-gray-700 font-semibold mb-2">Fecha y Hora</label>
           <DatePicker
             selected={date}
             onChange={(selectedDate) => setDate(selectedDate)}
             showTimeSelect
             dateFormat="Pp"
-            className="w-full p-2 border border-gray-300 rounded-md"
+            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-300"
             placeholderText="Selecciona la fecha y hora"
           />
         </div>

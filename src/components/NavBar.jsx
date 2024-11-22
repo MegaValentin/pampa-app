@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
-
+import IconClose from "./icons/IconClose";
+import IconBurguer from "./icons/IconBurguer";
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -9,13 +10,46 @@ function Navbar() {
     setIsOpen(!isOpen);
   };
 
+  const navList = [
+    { to: "/articulos" , label: "Articulos"},
+    { to: "/producciones" , label: "Galeria Comercial"},
+    { to: "/contact" , label: "Contacto"}
+  ]
+
+  const renderLinks = (links) => 
+    links.map((link, index) => (
+      <li>
+            <Link
+              key={index}
+              to={link.to}
+              className="text-black hover:text-gray-300 transition duration-300"
+            >
+              {link.label}
+            </Link>
+          </li>
+    )) 
+
+  const renderLinksToggle = (links) =>
+      links.map((link, index) => (
+        <li>
+            <Link
+              key={index}
+              to={link.to}
+              className="text-black hover:text-gray-300 transition duration-300"
+              onClick={toggleMenu}
+            >
+              {link.label}
+            </Link>
+          </li>
+      ))
+  
   return (
       
-    <nav className="container  mx-auto px-4 lg:px-20 py-2">
+    <nav className="  mx-auto px-4 lg:px-20 py-2">
       <div className="container mx-auto flex justify-between items-center">
         <Link
           to="/"
-          className="text-white text-2xl font-bold flex items-center ml-10"
+          className="text-white text-2xl font-bold flex items-center ml-10 px-10 lg:px-20"
         >
           <img src="/logo.png" alt="Logo" className="w-40 mr-2" />
         </Link>
@@ -27,65 +61,15 @@ function Navbar() {
             className="text-black focus:outline-none mr-9"
           >
             {isOpen ? (
-              <svg
-                className="w-8 h-8"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M6 18L18 6M6 6l12 12"
-                ></path>
-              </svg>
+              <IconClose/>
             ) : (
-              <svg
-                className="w-8 h-8"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth="2"
-                  d="M4 6h16M4 12h16M4 18h16"
-                ></path>
-              </svg>
+              <IconBurguer/>
             )}
           </button>
         </div>
 
         <ul className="hidden md:flex space-x-20 navegacion p-9 mr-24">
-          <li>
-            <Link
-              to="/articulos"
-              className="text-black hover:text-gray-300 transition duration-300"
-            >
-              Artículos
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/producciones"
-              className="text-black hover:text-gray-300 transition duration-300"
-            >
-              Galeria Comercial
-            </Link>
-          </li>
-          
-          <li>
-            <Link
-              to="/contact"
-              className="text-black hover:text-gray-300 transition duration-300"
-            >
-              Contacto
-            </Link>
-          </li>
+          {renderLinks(navList)}
         </ul>
       </div>
 
@@ -95,34 +79,7 @@ function Navbar() {
         } overflow-hidden transition-all duration-300 ease-in-out md:hidden p-1 mb-5`}
       >
         <ul className="flex flex-col space-y-4 mt-4 text-center">
-          <li>
-            <Link
-              to="/articulos"
-              className="text-black hover:text-gray-300 transition duration-300"
-              onClick={toggleMenu}
-            >
-              Artículos
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/producciones"
-              className="text-black hover:text-gray-300 transition duration-300"
-              onClick={toggleMenu}
-            >
-              Librería
-            </Link>
-          </li>
-          
-          <li>
-            <Link
-              to="/calendario"
-              className="text-black hover:text-gray-300 transition duration-300"
-              onClick={toggleMenu}
-            >
-              Calendario
-            </Link>
-          </li>
+         {renderLinksToggle(navList)}
         </ul>
       </div>
     </nav>
