@@ -38,7 +38,7 @@ const LatestArticle = () => {
         {latestArticle.images?.map((img, index) => (
             <div key={index} className="mb-8 flex justify-center">
               <img
-                className="max-w-full h-auto rounded shadow-md"
+                className="max-w-full h-auto "
                 src={`data:image/jpeg;base64,${img}`}
                 alt={`${latestArticle.title}-${index}`}
               />

@@ -19,7 +19,7 @@ const ListRandomArticle = () => {
         const fetchedArticles = response.data;
 
         // Selecciona 5 artículos aleatorios
-        const randomSelection = getRandomArticles(fetchedArticles, 5);
+        const randomSelection = getRandomArticles(fetchedArticles, 4);
         setArticles(fetchedArticles);
         setRandomArticles(randomSelection);
       } catch (err) {
@@ -47,7 +47,7 @@ const ListRandomArticle = () => {
   if (error) return <p className="text-center text-red-500">Error: {error}</p>;
 
   return (
-    <div className="container mx-auto p-9">
+    <div className="container mx-auto px-4 lg:px-20 py-8">
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div className="container mx-auto p-4 md:p-9 md:col-span-2">
           <h2 className="text-2xl font-bold text-gray-800 mb-4">
@@ -64,7 +64,7 @@ const ListRandomArticle = () => {
                 {article.images?.map((img, index) => (
                   <div key={index} className="mb-8 flex justify-center">
                     <img
-                      className="w-20 h-20 object-cover mr-4 rounded-lg"
+                      className="w-20 h-20 object-cover mr-4 "
                       src={`data:image/jpeg;base64,${img}`}
                       alt={`${article.title}-${index}`}
                     />

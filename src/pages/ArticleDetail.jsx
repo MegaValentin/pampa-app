@@ -12,53 +12,64 @@ const ArticleDetail = () => {
   const apiUrl = import.meta.env.VITE_REACT_APP_API_URL;
 
   useEffect(() => {
-
     const fetchArticle = async () => {
       try {
         const response = await axios.get(`${apiUrl}/api/article/${id}`);
         setArticle(response.data);
       } catch (err) {
-        setError(err.message);
+        setError('No se pudo cargar el artículo. Por favor, inténtalo más tarde.');
       } finally {
         setLoading(false);
       }
     };
 
     fetchArticle();
-  }, [id]); 
+  }, [id]);
 
   if (loading) return <Spinner />;
-  if (error) return <p className="text-center text-red-500">Error: {error}</p>;
+  if (error) return <p className="text-center text-red-500">{error}</p>;
+
+  // Función para dividir el contenido en bloques
+  const splitContentWithImages = (content, images) => {
+    const paragraphs = content.split(/\n+/); // Dividir el contenido en párrafos
+    const combined = [];
+
+    for (let i = 0; i < paragraphs.length; i++) {
+      combined.push(<p key={`p-${i}`} className="text-lg text-gray-700 leading-relaxed mb-6 whitespace-pre-wrap">{paragraphs[i]}</p>);
+
+      if (images?.[i]) {
+        combined.push(
+          <div key={`img-${i}`} className="flex justify-center my-4">
+            <img
+              className="max-w-full h-auto rounded shadow-md object-cover"
+              src={`data:image/jpeg;base64,${images[i]}`}
+              alt={`Imagen ${i + 1}`}
+            />
+          </div>
+        );
+      }
+    }
+
+    return combined;
+  };
 
   return (
     <>
-    <div className="container mx-auto p-4 md:p-9">
-      {article && (
-        <>
+      <div className="container mx-auto px-4 lg:px-20 py-8">
+        {article && (
+          <div className="bg-white p-6 md:p-10">
+            <h1 className="text-4xl font-bold text-gray-800 mb-4 border-b-2 pb-2">
+              {article.title}
+            </h1>
+            <h2 className="text-2xl text-gray-600 italic mb-4">
+              {article.subtitle}
+            </h2>
 
-          <div className="bg-white p-6 md:p-10 ">
-            <h1 className="text-4xl font-bold text-gray-800 mb-4 border-b-2 pb-2">{article.title}</h1>
-            <h2 className="text-2xl text-gray-600 italic mb-4">{article.subtitle}</h2>
-
-            <p className="text-lg text-gray-700 leading-relaxed mb-6 whitespace-pre-wrap">
-              {article.article}
-            </p>
-            
-            {article.images?.map((img, index) => (
-            <div key={index} className="mb-8 flex justify-center">
-              <img
-                className="max-w-full h-auto rounded shadow-md"
-                src={`data:image/jpeg;base64,${img}`}
-                alt={`${article.title}-${index}`}
-              />
-            </div>
-          ))}
-            
+            {splitContentWithImages(article.content, article.images)}
           </div>
-        </>
-      )}
-    </div>
-    <ListRandomArticle/>
+        )}
+      </div>
+      <ListRandomArticle />
     </>
   );
 };
