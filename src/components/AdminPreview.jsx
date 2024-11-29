@@ -35,7 +35,7 @@ const AdminPreview = () => {
 
   const changeStatusToReady = async () => {
     try {
-      const response = await axios.put(
+      const response = await axios.patch(
         `${apiUrl}/api/article/${id}/status`,
         { status: 'listo' },
         { withCredentials: true }

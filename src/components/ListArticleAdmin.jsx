@@ -3,6 +3,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import IconDelete from "./icons/IconDelete";
 import IconView from "./icons/IconView";
+import IconUpload from "./icons/IconUpload";
 
 const ListArticleAdmin = () => {
   const [articles, setArticles] = useState([]);
@@ -34,7 +35,9 @@ const ListArticleAdmin = () => {
         withCredentials: true,
       });
 
-      setArticles((prev) => prev.filter((article) => article._id !== articleToDelete._id));
+      setArticles((prev) =>
+        prev.filter((article) => article._id !== articleToDelete._id)
+      );
       setConfirmModalOpen(false);
       setArticleToDelete(null);
     } catch (error) {
@@ -53,24 +56,61 @@ const ListArticleAdmin = () => {
     setArticleToDelete(null);
   };
 
+  const changeStatusToUploaded = async (articleId) => {
+    try {
+      const response = await axios.patch(
+        `${apiUrl}/api/article/${articleId}/status`,
+        { status: "subido" },
+        { withCredentials: true }
+      );
+
+      if (response.status === 200) {
+        setArticles((prev) =>
+          prev.map((article) =>
+            article._id === articleId
+              ? { ...article, status: "subido" }
+              : article
+          )
+        );
+      }
+    } catch (error) {
+      console.error("Error al cambiar el estado del articulo: ", error)
+      setError("Hubo un error al cambiar el estado del articulo")
+    }
+  };
+
   return (
     <div className="max-w-4xl mx-auto p-6">
-      <h1 className="text-2xl font-bold mb-4 text-center">Lista de Artículos</h1>
+      <h1 className="text-2xl font-bold mb-4 text-center">
+        Lista de Artículos
+      </h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {articles.length > 0 ? (
         <ul className="divide-y divide-gray-200">
           {articles.map((article) => (
-            <li key={article._id} className="py-4 flex items-center justify-between">
+            <li
+              key={article._id}
+              className="py-4 flex items-center justify-between"
+            >
               <div>
                 <h2 className="text-xl font-semibold text-gray-800">
                   {article.title}
                 </h2>
                 <p className="text-gray-600">{article.subtitle}</p>
                 <p className="text-gray-500 mt-1">
-                  Publicado el: {new Date(article.createAt).toLocaleDateString()}
+                  Publicado el:{" "}
+                  {new Date(article.createAt).toLocaleDateString()}
                 </p>
               </div>
               <div className="flex space-x-4">
+                {article.status === "listo" && (
+                  <button
+                    onClick={() => changeStatusToUploaded(article._id)}
+                    className="text-green-500 hover:text-green-700"
+                  >
+                    <IconUpload/>
+                  </button>
+                )}
                 <Link
                   to={`/adminpreview/${article._id}`}
                   className="text-blue-500 hover:underline"
@@ -91,7 +131,6 @@ const ListArticleAdmin = () => {
         <p className="text-gray-600">No hay artículos disponibles.</p>
       )}
 
-      
       {confirmModalOpen && articleToDelete && (
         <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50">
           <div className="bg-white rounded-lg shadow-lg p-6 w-96">
@@ -100,9 +139,10 @@ const ListArticleAdmin = () => {
             </h2>
             <p className="text-gray-600 mt-2">{articleToDelete.title}</p>
             <p className="text-gray-600">{articleToDelete.subtitle}</p>
-                <p className="text-gray-500 mt-1">
-                  Publicado el: {new Date(articleToDelete.createAt).toLocaleDateString()}
-                </p>
+            <p className="text-gray-500 mt-1">
+              Publicado el:{" "}
+              {new Date(articleToDelete.createAt).toLocaleDateString()}
+            </p>
             <div className="flex justify-end gap-4 mt-4">
               <button
                 onClick={closeConfirmModal}
