@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import IconDelete from "./icons/IconDelete";
-import IconView from "./icons/IconView";
-import IconUpload from "./icons/IconUpload";
+import ArticleItem from "./ArticleItem";
 
 const ListArticleAdmin = () => {
   const [articles, setArticles] = useState([]);
@@ -74,10 +72,33 @@ const ListArticleAdmin = () => {
         );
       }
     } catch (error) {
-      console.error("Error al cambiar el estado del articulo: ", error)
-      setError("Hubo un error al cambiar el estado del articulo")
+      console.error("Error al cambiar el estado del articulo: ", error);
+      setError("Hubo un error al cambiar el estado del articulo");
     }
   };
+
+  const renderArticleList = (title, articles, onDelete, onChangeStatus) => {
+    if (articles.length === 0) return null;
+
+    return (
+      <>
+        <h4 className="text-lg font-bold my-4">{title}</h4>
+        <ul className="divide-y divide-gray-200">
+          {articles.map((article) => (
+            <ArticleItem
+              key={article._id}
+              article={article}
+              onDelete={onDelete}
+              onChangeStatus={onChangeStatus}
+            />
+          ))}
+        </ul>
+      </>
+    );
+  };
+
+  const filterArticleByStatus = (status) =>
+    articles.filter((article) => article.status === status);
 
   return (
     <div className="max-w-4xl mx-auto p-6">
@@ -86,47 +107,29 @@ const ListArticleAdmin = () => {
       </h1>
       {error && <p className="text-red-500 mb-4">{error}</p>}
       {articles.length > 0 ? (
-        <ul className="divide-y divide-gray-200">
-          {articles.map((article) => (
-            <li
-              key={article._id}
-              className="py-4 flex items-center justify-between"
-            >
-              <div>
-                <h2 className="text-xl font-semibold text-gray-800">
-                  {article.title}
-                </h2>
-                <p className="text-gray-600">{article.subtitle}</p>
-                <p className="text-gray-500 mt-1">
-                  Publicado el:{" "}
-                  {new Date(article.createAt).toLocaleDateString()}
-                </p>
-              </div>
-              <div className="flex space-x-4">
-                {article.status === "listo" && (
-                  <button
-                    onClick={() => changeStatusToUploaded(article._id)}
-                    className="text-green-500 hover:text-green-700"
-                  >
-                    <IconUpload/>
-                  </button>
-                )}
-                <Link
-                  to={`/adminpreview/${article._id}`}
-                  className="text-blue-500 hover:underline"
-                >
-                  <IconView />
-                </Link>
-                <button
-                  onClick={() => openConfirmModal(article)}
-                  className="text-red-500 hover:text-red-700"
-                >
-                  <IconDelete />
-                </button>
-              </div>
-            </li>
-          ))}
-        </ul>
+        <>
+          {renderArticleList(
+            "Borradores",
+            filterArticleByStatus("borrador"),
+            (article) =>
+              setConfirmModalOpen(true) || setArticleToDelete(article),
+            changeStatusToUploaded
+          )}
+          {renderArticleList(
+            "Artículos Listos para Subir",
+            filterArticleByStatus("listo"),
+            (article) =>
+              setConfirmModalOpen(true) || setArticleToDelete(article),
+            changeStatusToUploaded
+          )}
+          {renderArticleList(
+            "Artículos Publicados",
+            filterArticleByStatus("subido"),
+            (article) =>
+              setConfirmModalOpen(true) || setArticleToDelete(article),
+            changeStatusToUploaded
+          )}
+        </>
       ) : (
         <p className="text-gray-600">No hay artículos disponibles.</p>
       )}
@@ -145,7 +148,7 @@ const ListArticleAdmin = () => {
             </p>
             <div className="flex justify-end gap-4 mt-4">
               <button
-                onClick={closeConfirmModal}
+                onClick={() => setConfirmModalOpen(false)}
                 className="px-4 py-2 bg-gray-200 hover:bg-gray-300 rounded text-gray-700"
               >
                 Cancelar

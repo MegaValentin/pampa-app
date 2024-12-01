@@ -32,7 +32,7 @@ const LatestArticle = () => {
 
   return (
     <div className="container mx-auto p-9">
-      {latestArticle && (
+      {latestArticle.status === "subido" && (
         <Link to={`/article/${latestArticle.id}`} key={latestArticle.id}>
         <div className="border-b-1 border-gray-300 pb-6 transition-transform duration-300 ease-in-out transform hover:scale-100 hover:shadow-lg articulo">
         {latestArticle.images?.map((img, index) => (

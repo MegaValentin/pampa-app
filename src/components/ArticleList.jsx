@@ -33,7 +33,9 @@ const ArticleList = () => {
   return (
     <div className="container mx-auto p-4 md:p-9">
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        
         {articles
+        .filter((article) => article.status === 'subido')
           .slice()  
           .reverse() 
           .slice(1) 
